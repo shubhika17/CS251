@@ -15,5 +15,7 @@ WebCrawler::WebCrawler(int maxUrls, int nurlRoots, const char ** urlRoots){
 	    _urlArray[i]._url = temp;
 	    _urlArray[i]._description = NULL;
 	}
+	_urlToUrlRecord = new HashTableTemplate<int>();
+	_wordToURLRecordList = new HashTableTemplate<URLRecordList*>(); 
 }
 // Add your implementation here
