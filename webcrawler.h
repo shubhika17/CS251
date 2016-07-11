@@ -2,6 +2,8 @@
 // CS251 Definitions for web-crawler
 
 #include "HashTableTemplate.h"
+#include "openhttp.h"
+#include "SimpleHTMLParser.h"
 
 // Stores a URL and the first 100 words
 struct URLRecord {
@@ -41,6 +43,8 @@ class WebCrawler {
   void writeWordFile(const char *wordFileName);
 
   // Add any other objects you may need
+  void onAnchorFound(char * url);
+  void onContentFound(char c);
 };
 
 
