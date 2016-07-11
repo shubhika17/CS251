@@ -1,4 +1,3 @@
-
 #include "webcrawler.h"
 #include <string.h>
 
@@ -18,4 +17,17 @@ WebCrawler::WebCrawler(int maxUrls, int nurlRoots, const char ** urlRoots){
 	_urlToUrlRecord = new HashTableTemplate<int>();
 	_wordToURLRecordList = new HashTableTemplate<URLRecordList*>(); 
 }
+void WebCrawler::crawl() {
+	while(_headURL < _tailURL){
+		char * currURL = _url[_headURL]._url;
+		_headURL++;
+		int i;
+		char * currBuffer = fetchHTML(curr, &n);
+		if(currBuffer == NULL){
+			continue;
+		}
+		parse(currBuffer, n);
+	}
+}
+
 // Add your implementation here
