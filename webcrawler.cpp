@@ -48,7 +48,7 @@ void WebCrawler::crawl() {
 }
 void WebCrawler::writeURLFile(const char * urlFileName){
 	FILE * fd;
-	fd = open(urlFileName, "w");
+	fd = fopen(urlFileName, "w");
 	for(int i = 0; i < _tailURL; i++){
 		fprintf(fd,"%d %s\n", i, _urlArray[i]._url);
 		if(_urlArray[i]._description != NULL){
@@ -62,7 +62,7 @@ void WebCrawler::writeURLFile(const char * urlFileName){
 }
 void WebCrawler::writeWordFile(const char *wordFileName){
 	FILE * fd;
-	fd = open(wordFileName, "w");
+	fd = fopen(wordFileName, "w");
 	for(int i = 0; i < 2039; i++){
 		if(!(_wordToURLRecordList -> _buckets[i] == NULL)){
 			fprintf(fd, "%s", _wordToURLRecordList -> _buckets[i] -> _key);
@@ -78,4 +78,11 @@ void WebCrawler::writeWordFile(const char *wordFileName){
 	}
 	fclose(fd);
 }
-// Add your implementation here
+int main (int argc, char ** argv ) {
+	if(argc < 2){
+		exit(1);
+	}
+	int maxUrls;
+	maxUrls = 1000;
+
+}// Add your implementation here

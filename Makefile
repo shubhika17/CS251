@@ -1,5 +1,5 @@
 
-all: gethttp git-commit webcrawler
+all: gethttp webcrawler git-commit
 
 gethttp: gethttp.cpp openhttp.cpp SimpleHTMLParser.cpp
 	g++ -o gethttp -g gethttp.cpp openhttp.cpp SimpleHTMLParser.cpp
