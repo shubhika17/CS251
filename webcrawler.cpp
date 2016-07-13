@@ -31,7 +31,7 @@ void WebCrawler::onAnchorFound(char *url){
 }
 void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
-		char * currURL = _url[_headURL]._url;
+		char * currURL = _urlArray[_headURL]._url;
 		_headURL++;
 		int i;
 		char * currBuffer = fetchHTML(curr, &n);
