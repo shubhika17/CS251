@@ -70,7 +70,7 @@ void WebCrawler::writeWordFile(const char *wordFileName){
 				if (!(curr -> _urlRecordIndex < 0 || curr -> _urlRecordIndex >= 2039)){
 					fprintf(fd, "%d", curr -> _urlRecordIndex);	
 				}
-				curr = curr -> next;
+				curr = curr -> _next;
 			}
 			fprintf(fd, "\n");
 		}	
