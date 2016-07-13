@@ -1,6 +1,7 @@
 
 // CS251 Definitions for web-crawler
-
+#ifndef WEBCRAWLER_H
+#define WEBCRAWLER_H
 #include "HashTableTemplate.h"
 #include "openhttp.h"
 #include "SimpleHTMLParser.h"
@@ -48,3 +49,4 @@ class WebCrawler : public SimpleHTMLParser {
 };
 
 
+#endif
