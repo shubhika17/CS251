@@ -27,7 +27,7 @@ void WebCrawler::onAnchorFound(char *url){
 	if(count >= _maxUrls){
 		return;
 	}
-	char * currURL = _urlArray.[_headURL]._url;
+	char * currURL = _urlArray[_headURL]._url;
 }
 void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
