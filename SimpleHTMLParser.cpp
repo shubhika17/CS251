@@ -21,7 +21,7 @@ bool
 SimpleHTMLParser::parse(char * buffer, int n)
 {
 	enum { START, TAG, SCRIPT, ANCHOR, HREF,
-	       COMMENT, FRAME, SRC, HTML } state;
+	       COMMENT, FRAME, SRC, HTML, META} state;
 
 	state = START;
 	
@@ -52,7 +52,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			else {
 				char c = *b;
-				//Substitute one or more blank chars with a single space
+						//Substitute one or more blank chars with a single space
 				if (c=='\n'||c=='\r'||c=='\t'||c==' ') {
 					if (!lastCharSpace) {
 						onContentFound(' ');
