@@ -1,6 +1,7 @@
 #include "webcrawler.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 char * des;
 char * word;
 int count;
