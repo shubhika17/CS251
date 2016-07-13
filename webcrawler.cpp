@@ -33,8 +33,8 @@ void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
 		char * currURL = _urlArray[_headURL]._url;
 		_headURL++;
-		int i;
-		char * currBuffer = fetchHTML(curr, &n);
+		int n;
+		char * currBuffer = fetchHTML(currURL, &n);
 		if(currBuffer == NULL){
 			continue;
 		}
