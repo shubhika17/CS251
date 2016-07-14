@@ -21,7 +21,7 @@ bool
 SimpleHTMLParser::parse(char * buffer, int n)
 {
 	enum { START, TAG, SCRIPT, ANCHOR, HREF,
-	       COMMENT, FRAME, SRC, HTML, META, CONTENT} state;
+	       COMMENT, FRAME, SRC, HTML, META, CONTENT, TITLE} state;
 
 	state = START;
 	
@@ -30,6 +30,8 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	bool lastCharSpace = false;
 	bool foundDes = false;
 	bool foundWord = false;
+	bool title = false;
+	int count = 0;
 	while (b < bufferEnd) {
 		//printf("<%c,%d,%d>", *b, *b,state);
 		switch (state) {
@@ -46,9 +48,6 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			else if (match(&b,"<FRAME ")) {
 				state = FRAME;
 			}
-			else if	(match(&b,"<")) {
-				state = TAG;
-			}
 			else if(match(&b, "HTML " )){
 				state = HTML;
 			}else if(match(&b, "<meta")){
@@ -56,20 +55,34 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			else if(match(&b, "content")){
 				state = CONTENT;
+			}else if(match(&b, "<title>")){
+				state = TITLE;
+			}
+			else if(match(&b,"<")) {
+				state = TAG;
 			} 
 			else {
 				char c = *b;
 						//Substitute one or more blank chars with a single space
 				if (c=='\n'||c=='\r'||c=='\t'||c==' ') {
 					if (!lastCharSpace) {	
-						if (foundWord)
+						if (foundWord){
 							onContentFound(' ');
+						}
 					}
 					lastCharSpace = true;
 				}
 				else {
-					if (foundWord)
+					if (foundWord){
 						onContentFound(c);
+						if(*b == '"'){
+							count ++;
+						}
+						if((count == 1)){
+							foundWord = false;
+							count = 0;
+						}
+					}
 					lastCharSpace = false;
 				}
 				
@@ -202,6 +215,9 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			if (match(&buffer,"name=\"description\"")){
 				foundDes = true;	
 			}
+			if(match(&buffer,"name=\"keywords\"")){
+				foundWord = true;
+			}
 			state = START;
 			b++;
 			break;			 		
@@ -212,6 +228,10 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				while(*b != '"'){
 					b++;
 				}
+				if (title){
+					delete description;
+					title = false;
+				}
 				b++;
 				while(*b != '"'){
 					if (description == NULL){
@@ -219,11 +239,39 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					}
 					char * single = new char[1];
 					single[0] = *b;
+					b++;
 					strcat(description,single);
-					delete  single; //ask
+					delete  single; //ask	
 				}
-			
+				foundDes = false;			
 			}
+			if(foundWord){
+				while(*b != '"'){
+					b++;
+				}
+			}
+			state = START;
+			b++;
+			break;
+		}
+		case TITLE:
+		{
+			if (description == NULL){
+				if (*b == '>'){
+					b++;
+				}
+				while( *b != '<'){
+					char * single = new char[1];
+					single[0] = *b;
+					b++;
+					strcat(description,single);
+					delete  single; //ask	
+				}
+				title = true;
+			}
+			state = START;
+			b++;
+			break;
 		}
 		default:;
 		}
