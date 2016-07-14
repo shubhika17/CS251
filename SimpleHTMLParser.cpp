@@ -21,13 +21,15 @@ bool
 SimpleHTMLParser::parse(char * buffer, int n)
 {
 	enum { START, TAG, SCRIPT, ANCHOR, HREF,
-	       COMMENT, FRAME, SRC, HTML, META} state;
+	       COMMENT, FRAME, SRC, HTML, META, CONTENT} state;
 
 	state = START;
 	
 	char * bufferEnd = buffer + n;
 	char * b = buffer;
 	bool lastCharSpace = false;
+	bool foundDes = false;
+	bool foundWord = false;
 	while (b < bufferEnd) {
 		//printf("<%c,%d,%d>", *b, *b,state);
 		switch (state) {
@@ -49,18 +51,25 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			else if(match(&b, "HTML " )){
 				state = HTML;
+			}else if(match(&b, "<meta")){
+				state = META;
 			}
+			else if(match(&b, "content")){
+				state = CONTENT;
+			} 
 			else {
 				char c = *b;
 						//Substitute one or more blank chars with a single space
 				if (c=='\n'||c=='\r'||c=='\t'||c==' ') {
-					if (!lastCharSpace) {
-						onContentFound(' ');
+					if (!lastCharSpace) {	
+						if (foundWord)
+							onContentFound(' ');
 					}
 					lastCharSpace = true;
 				}
 				else {
-					onContentFound(c);
+					if (foundWord)
+						onContentFound(c);
 					lastCharSpace = false;
 				}
 				
@@ -88,9 +97,11 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			if (match(&b,"\"")) {
 				// Found ending "
 				state = ANCHOR;
-				urlAnchor[urlAnchorLength] = '\0';
+		
+		urlAnchor[urlAnchorLength] = '\0';
 				onAnchorFound(urlAnchor);
-				//printf("\n");
+		
+		//printf("\n");
 			}
 			else {
 				if ( urlAnchorLength < MaxURLLength-1) {
@@ -173,6 +184,42 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				b++;
 			}
 			break;
+		}
+		case META: 
+		{
+			char * buffer = b;
+			int count = 0;
+			for(int i = 0; count < 2; i++){
+			
+			if(*(buffer) == '"'){
+					count++;
+				}
+				buffer++;
+			}
+			while( *buffer != 'n'){
+				buffer++;
+			}
+			if (match(&buffer,"name=\"description\"")){
+				foundDes = true;	
+			}
+			state = START;
+			b++;
+			break;			 		
+		}
+		case CONTENT: 
+		{
+			if(foundDes){
+				while(*b != '"'){
+					b++;
+				}
+				b++;
+				while(*b != '"'){
+					char * single = new char[1];
+					single[0] = *b;
+					strcat(description,b);
+				}
+			
+			}
 		}
 		default:;
 		}
