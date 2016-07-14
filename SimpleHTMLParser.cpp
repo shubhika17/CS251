@@ -215,7 +215,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				b++;
 				while(*b != '"'){
 					if (description == NULL){
-						description = "\0";
+						description =(char *) "\0";
 					}
 					char * single = new char[1];
 					single[0] = *b;
