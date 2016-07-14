@@ -216,7 +216,8 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				while(*b != '"'){
 					char * single = new char[1];
 					single[0] = *b;
-					strcat(description,b);
+					strcat(description,single);
+					delete  single; //ask
 				}
 			
 			}
