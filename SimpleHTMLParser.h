@@ -13,7 +13,7 @@ class SimpleHTMLParser {
 	bool match(char **b, const char *m);
  public:
 	SimpleHTMLParser();
-	char * description = "\0";	
+	char * description;	
 	bool parse(char * buffer, int n);
 
 	// Calbacks
