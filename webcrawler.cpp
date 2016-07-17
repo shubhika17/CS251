@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "webcrawler.h"
 //#include <stdlib.h>
-char * des;
 char * word;
 int count;
 WebCrawler::WebCrawler(int maxUrls, int nurlRoots, const char ** urlRoots){
@@ -29,6 +28,39 @@ void WebCrawler::onAnchorFound(char *url){
 		return;
 	}
 	char * currURL = _urlArray[_headURL]._url;
+	int len = strlen(currURL);
+	if(currURL[len - 1] != '/'){
+		currURL = strcat(currURL, "/");
+	}
+	if(url[0] == '/'){
+		int sum = 0;
+		for(int i = 0; i < len; i++){
+			if(currURL[i] == '/'){
+				sum++;
+			}
+			if(sum > 2) {
+				currURL[i] = '\0';
+				break;
+			}
+		
+		}
+		url = strcat(currURL,url);
+	}else {
+		char * start1 = (char *)"http://";
+		char * start2 = (char *)"http://";
+		if ((strncmp(url,start1,7) != 0)&&(strncmp(url,start2,8) != 0)){
+			url = strcat(currURL,url);
+		}
+	}
+	int n;
+	if(_urlToUrlRecord -> find(url,&n) == false) {
+		_urlArray[_tailURL]._url = url;
+		_urlArray[_tailURL]._description = NULL;
+		_tailURL++;
+		_urlToUrlRecord -> insertItem(url,_headURL);
+		count++;
+	
+	}
 }
 void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
@@ -40,9 +72,8 @@ void WebCrawler::crawl() {
 			continue;
 		}
 		parse(currBuffer, n);
-		_urlArray[_headURL]._description = des;
-		word = NULL;
-		des = NULL;
+		_urlArray[_headURL]._description = description;
+		delete description;
 		_headURL += 1;
 	}
 }
@@ -83,6 +114,17 @@ int main (int argc, char ** argv ) {
 		exit(1);
 	}
 	int maxUrls;
-	maxUrls = 1000;
-
+	//maxUrls = 1000;
+	count = 0;
+	int temp = 1;
+	if(strcmp(argv[1], "-u") == 0){
+		maxUrls = atoi(argv[2]);
+		temp = 3;
+	}
+	const char ** urlRoots = new const char *[argc - temp];
+	int intialUrls = argc - temp;
+	WebCrawler *web = new WebCrawler(maxUrls, intialUrls, urlRoots);
+	web -> crawl();
+	web -> writeURLFile("url.txt");
+	web -> writeWordFile("word.txt");
 }// Add your implementation here
