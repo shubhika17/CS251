@@ -21,7 +21,33 @@ WebCrawler::WebCrawler(int maxUrls, int nurlRoots, const char ** urlRoots){
 	_wordToURLRecordList = new HashTableTemplate<URLRecordList*>(); 
 }
 void WebCrawler::onContentFound(char c){
-
+	if(word == NULL) {
+		word = new char[1];
+		word[0] = '\0';
+	}
+	if((c >= 'a' && c <= 'z')||(c >= 'A' && c <= 'Z')||(c >= '0' && c <= '9')){
+		char * letter = new char[2];
+		letter[0] = c;
+		letter[1] = '\0';
+		word = strcat(word,letter);
+	}else{
+		if(strlen(word) <= 0){
+			return;
+		}
+		URLRecordList * n = NULL;
+		if(_wordToURLRecordList -> find(word, &n) == false){
+			URLRecordList * item = new URLRecordList();
+			item -> _urlRecordIndex = _headURL;
+			item -> _next = NULL;
+			_wordToURLRecordList -> insertItem(word,item);
+		}else {
+			URLRecordList * item = new URLRecordList();
+			item -> _urlRecordIndex = _headURL;
+			item -> _next = n;
+			_wordToURLRecordList -> insertItem(word, item);
+		}
+		delete [] word;
+	} 
 }
 void WebCrawler::onAnchorFound(char *url){
 	if(count >= _maxUrls){
@@ -73,7 +99,7 @@ void WebCrawler::crawl() {
 		}
 		parse(currBuffer, n);
 		_urlArray[_headURL]._description = description;
-		delete description;
+		delete [] description;
 		_headURL += 1;
 	}
 }
