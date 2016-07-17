@@ -29,7 +29,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	char * b = buffer;
 	bool lastCharSpace = false;
 	bool foundDes = false;
-	bool foundWord = false;
+
 	bool title = false;
 	int count = 0;
 	while (b < bufferEnd) {
@@ -66,26 +66,16 @@ SimpleHTMLParser::parse(char * buffer, int n)
 						//Substitute one or more blank chars with a single space
 				if (c=='\n'||c=='\r'||c=='\t'||c==' ') {
 					if (!lastCharSpace) {	
-						if (foundWord){
+					
 							onContentFound(' ');
-						}
+						
 					}
 					lastCharSpace = true;
 				}
 				else {
-					if (foundWord){
-						onContentFound(c);
-						if(*b == '"'){
-							count ++;
-						}
-						if((count == 1)){
-							foundWord = false;
-							count = 0;
-						}
-					}
-					lastCharSpace = false;
+					onContentFound(c);
 				}
-				
+				lastCharSpace = false;
 				b++;
 			}
 			break;
@@ -215,9 +205,6 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			if (match(&buffer,"name=\"description\"")){
 				foundDes = true;	
 			}
-			if(match(&buffer,"name=\"keywords\"")){
-				foundWord = true;
-			}
 			state = START;
 			b++;
 			break;			 		
@@ -229,26 +216,23 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					b++;
 				}
 				if (title){
-					delete description;
+					delete [] description;
 					title = false;
 				}
 				b++;
 				while(*b != '"'){
 					if (description == NULL){
-						description =(char *) "\0";
+						description = new char[1];
+						description[0] = '\0';
 					}
-					char * single = new char[1];
-					single[0] = *b;
+					char * letter  = new char[2];
+					letter[0] = *b;
+					letter[1] = '\0';
 					b++;
-					strcat(description,single);
-					delete  single; //ask	
+					strcat(description,letter);
+					delete[]  letter; //ask	
 				}
 				foundDes = false;			
-			}
-			if(foundWord){
-				while(*b != '"'){
-					b++;
-				}
 			}
 			state = START;
 			b++;
@@ -257,15 +241,18 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		case TITLE:
 		{
 			if (description == NULL){
+				description = new char[1];
+				description[0] = '\0';
 				if (*b == '>'){
 					b++;
 				}
 				while( *b != '<'){
-					char * single = new char[1];
-					single[0] = *b;
+					char * letter = new char[2];
+					letter[0] = *b;
+					letter[1] = '\0';
 					b++;
-					strcat(description,single);
-					delete  single; //ask	
+					strcat(description,letter);
+					delete []  letter; //ask	
 				}
 				title = true;
 			}
