@@ -148,8 +148,11 @@ int main (int argc, char ** argv ) {
 		temp = 3;
 	}
 	const char ** urlRoots = new const char *[argc - temp];
-	int intialUrls = argc - temp;
-	WebCrawler *web = new WebCrawler(maxUrls, intialUrls, urlRoots);
+	int initialUrls = argc - temp;
+	for (int i = 0; i < initialUrls; i++) {
+		urlRoots[i] = strdup(argv[initialUrls - 1 - i]);
+	}
+	WebCrawler *web = new WebCrawler(maxUrls, initialUrls, urlRoots);
 	web -> crawl();
 	web -> writeURLFile("url.txt");
 	web -> writeWordFile("word.txt");
