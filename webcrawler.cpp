@@ -100,8 +100,7 @@ void WebCrawler::crawl() {
 		}
 		parse(currBuffer, n);
 		printf("wsgqsdgja\n");
-		_urlArray[_headURL]._description = description;
-		description = NULL;
+		_urlArray[_headURL]._description = strdup(description.c_str());
 		_headURL += 1;
 	}
 }

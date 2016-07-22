@@ -216,21 +216,12 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					b++;
 				}
 				if (title){
-					description = NULL;
+					description = "";
 					title = false;
 				}
 				b++;
 				while(*b != '"'){
-					if (description == NULL){
-						description = new char[1];
-						description[0] = '\0';
-					}
-					char * letter  = new char[2];
-					letter[0] = *b;
-					letter[1] = '\0';
-					b++;
-					strcat(description,letter);
-					delete letter; //ask	
+					description += *b;
 				}
 				foundDes = false;			
 			}
@@ -240,22 +231,13 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		}
 		case TITLE:
 		{
-			if (description == NULL){
-				description = new char[1];
-				description[0] = '\0';
-				if (*b == '>'){
-					b++;
-				}
-				while( *b != '<'){
-					char * letter = new char[2];
-					letter[0] = *b;
-					letter[1] = '\0';
-					b++;
-					strcat(description,letter);
-					delete []  letter; //ask	
-				}
-				title = true;
+			if (*b == '>'){
+				b++;
 			}
+			while( *b != '<'){
+				description += *b;
+			}
+			title = true;
 			state = START;
 			b++;
 			break;
