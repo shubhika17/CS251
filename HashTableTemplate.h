@@ -116,6 +116,9 @@ bool HashTableTemplate<Data>::find( const char * key, Data * data)
 {
   // Add implementation here
 int i = hash(key);
+  if(_buckets[i] == NULL){
+  	return false;
+  }
   HashTableTemplateEntry<Data> * list = _buckets[i];
   while((list!= NULL)){
 	 if(strcmp(list -> _key,key) == 0){
