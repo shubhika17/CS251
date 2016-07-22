@@ -99,7 +99,7 @@ void WebCrawler::crawl() {
 		}
 		parse(currBuffer, n);
 		_urlArray[_headURL]._description = description;
-		delete [] description;
+		description = NULL;
 		_headURL += 1;
 	}
 }
