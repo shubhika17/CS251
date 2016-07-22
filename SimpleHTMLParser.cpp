@@ -237,6 +237,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			while( *b != '<'){
 				description += *b;
+				b++;
 			}
 			title = true;
 			state = START;
