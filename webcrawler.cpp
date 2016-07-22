@@ -46,7 +46,7 @@ void WebCrawler::onContentFound(char c){
 			item -> _next = n;
 			_wordToURLRecordList -> insertItem(word, item);
 		}
-		delete [] word;
+		word = NULL;
 	} 
 }
 void WebCrawler::onAnchorFound(char *url){
