@@ -55,7 +55,7 @@ void WebCrawler::onAnchorFound(char *url){
 	}
 	int n;
 	if(_urlToUrlRecord -> find(url,&n) == false) {
-		_urlArray[_tailURL]._url = url;
+		_urlArray[_tailURL]._url = strdup(url);
 		_urlArray[_tailURL]._description = NULL;
 		_tailURL++;
 		_urlToUrlRecord -> insertItem(url,_headURL);
