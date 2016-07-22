@@ -150,7 +150,7 @@ int main (int argc, char ** argv ) {
 	const char ** urlRoots = new const char *[argc - temp];
 	int initialUrls = argc - temp;
 	for (int i = 0; i < initialUrls; i++) {
-		urlRoots[i] = strdup(argv[initialUrls - 1 - i]);
+		urlRoots[i] = strdup(argv[argc - initialUrls - i]);
 	}
 	WebCrawler *web = new WebCrawler(maxUrls, initialUrls, urlRoots);
 	web -> crawl();
