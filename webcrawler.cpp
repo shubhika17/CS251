@@ -94,6 +94,7 @@ void WebCrawler::crawl() {
 		_headURL++;
 		int n;
 		char * currBuffer = fetchHTML(currURL, &n);
+		printf("asdifahsi\n");
 		if(currBuffer == NULL){
 			continue;
 		}
