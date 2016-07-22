@@ -53,31 +53,6 @@ void WebCrawler::onAnchorFound(char *url){
 	if(count >= _maxUrls){
 		return;
 	}
-	char * currURL = _urlArray[_headURL]._url;
-	int len = strlen(currURL);
-	if(currURL[len - 1] != '/'){
-		currURL = strcat(currURL, "/");
-	}
-	if(url[0] == '/'){
-		int sum = 0;
-		for(int i = 0; i < len; i++){
-			if(currURL[i] == '/'){
-				sum++;
-			}
-			if(sum > 2) {
-				currURL[i] = '\0';
-				break;
-			}
-		
-		}
-		url = strcat(currURL,url);
-	}else {
-		char * start1 = (char *)"http://";
-		char * start2 = (char *)"https://";
-		if ((strncmp(url,start1,7) != 0)&&(strncmp(url,start2,8) != 0)){
-			url = strcat(currURL,url);
-		}
-	}
 	int n;
 	if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = url;
