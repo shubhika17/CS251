@@ -99,6 +99,7 @@ void WebCrawler::crawl() {
 			continue;
 		}
 		parse(currBuffer, n);
+		printf("wsgqsdgja\n");
 		_urlArray[_headURL]._description = description;
 		description = NULL;
 		_headURL += 1;

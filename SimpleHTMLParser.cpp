@@ -216,7 +216,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					b++;
 				}
 				if (title){
-					delete [] description;
+					description = NULL;
 					title = false;
 				}
 				b++;
@@ -230,7 +230,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					letter[1] = '\0';
 					b++;
 					strcat(description,letter);
-					delete[]  letter; //ask	
+					delete letter; //ask	
 				}
 				foundDes = false;			
 			}
