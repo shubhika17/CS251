@@ -73,7 +73,7 @@ void WebCrawler::onAnchorFound(char *url){
 		url = strcat(currURL,url);
 	}else {
 		char * start1 = (char *)"http://";
-		char * start2 = (char *)"http://";
+		char * start2 = (char *)"https://";
 		if ((strncmp(url,start1,7) != 0)&&(strncmp(url,start2,8) != 0)){
 			url = strcat(currURL,url);
 		}
@@ -91,7 +91,7 @@ void WebCrawler::onAnchorFound(char *url){
 void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
 		char * currURL = _urlArray[_headURL]._url;
-		_headURL++;
+		//_headURL++;
 		int n;
 		char * currBuffer = fetchHTML(currURL, &n);
 		printf("asdifahsi\n");
