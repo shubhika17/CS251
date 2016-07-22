@@ -222,6 +222,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				b++;
 				while(*b != '"'){
 					description += *b;
+					b++;
 				}
 				foundDes = false;			
 			}
