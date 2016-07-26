@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "webcrawler.h"
+
 //#include <stdlib.h>
 char * word;
 int count;
@@ -40,13 +41,15 @@ void WebCrawler::onContentFound(char c){
 			item -> _urlRecordIndex = _headURL;
 			item -> _next = NULL;
 			_wordToURLRecordList -> insertItem(word,item);
-		}else {
+		}else if(n -> _urlRecordIndex != _headURL) {
 			URLRecordList * item = new URLRecordList();
 			item -> _urlRecordIndex = _headURL;
 			item -> _next = n;
 			_wordToURLRecordList -> insertItem(word, item);
+		} else {
+			delete word;
+			word = NULL;
 		}
-		word = NULL;
 	} 
 }
 void WebCrawler::onAnchorFound(char *url){
@@ -54,6 +57,12 @@ void WebCrawler::onAnchorFound(char *url){
 		return;
 	}
 	int n;
+	char * host;
+	int port;
+	char * document;
+	//if(parseURL(url,host, &port,document)!= 0){
+		//return;
+	//}
 	if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
 		_urlArray[_tailURL]._description = NULL;
@@ -69,12 +78,12 @@ void WebCrawler::crawl() {
 		_headURL++;
 		int n;
 		char * currBuffer = fetchHTML(currURL, &n);
-		printf("asdifahsi\n");
+		//printf("asdifahsi\n");
 		if(currBuffer == NULL){
 			continue;
 		}
 		parse(currBuffer, n);
-		printf("wsgqsdgja\n");
+		//printf("wsgqsdgja\n");
 		_urlArray[_headURL]._description = strdup(description.c_str());
 		//_headURL += 1;
 	}
