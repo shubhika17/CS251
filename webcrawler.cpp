@@ -38,14 +38,14 @@ void WebCrawler::onContentFound(char c){
 		URLRecordList * n = NULL;
 		if(_wordToURLRecordList -> find(word, &n) == false){
 			URLRecordList * item = new URLRecordList();
-			item -> _urlRecordIndex = _headURL;
+			item -> _urlRecordIndex = _headURL - 1;
 			item -> _next = NULL;
 			_wordToURLRecordList -> insertItem(word,item);
-		} else if(n->_urlRecordIndex == _headURL){
+		} else if(n->_urlRecordIndex == _headURL - 1){
 		
 		}else {
 			URLRecordList * item = new URLRecordList();
-			item -> _urlRecordIndex = _headURL;
+			item -> _urlRecordIndex = _headURL - 1;
 			item -> _next = n;
 			_wordToURLRecordList -> insertItem(word, item);
 		} 
