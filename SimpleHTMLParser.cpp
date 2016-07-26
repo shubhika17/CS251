@@ -24,7 +24,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	       COMMENT, FRAME, SRC, HTML, META, CONTENT, TITLE} state;
 
 	state = START;
-	
+	int letter = 0;	
 	char * bufferEnd = buffer + n;
 	char * b = buffer;
 	bool lastCharSpace = false;
@@ -211,6 +211,11 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		}
 		case CONTENT: 
 		{
+			if(letter >= 500) {
+				b++;
+				state = START;
+				break;
+			}
 			if(foundDes){
 				while(*b != '"'){
 					b++;
@@ -223,6 +228,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				while(*b != '"'){
 					description += *b;
 					b++;
+					letter++;
 				}
 				foundDes = false;			
 			}
