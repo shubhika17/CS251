@@ -102,7 +102,7 @@ void WebCrawler::writeWordFile(const char *wordFileName){
 			URLRecordList *curr = _wordToURLRecordList -> _buckets[i] -> _data;
 			while (curr != NULL) {
 				if (!(curr -> _urlRecordIndex < 0 || curr -> _urlRecordIndex >= 2039)){
-					fprintf(fd, "%d", curr -> _urlRecordIndex);	
+					fprintf(fd, " %d", curr -> _urlRecordIndex);	
 				}
 				curr = curr -> _next;
 			}
