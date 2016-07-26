@@ -231,8 +231,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					letter++;
 				}
 				foundDes = false;			
-				des = true;
-			}
+				des = true;			
 			state = START;
 			b++;
 			break;
@@ -255,8 +254,8 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		}
 		
 	}
+	}
 }
-
 void
 SimpleHTMLParser::onContentFound(char c) {
 }
