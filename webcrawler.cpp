@@ -74,7 +74,7 @@ void WebCrawler::onAnchorFound(char *url){
 	}
 }
 void WebCrawler::crawl() {
-	while(_headURL < _tailURL){
+	while(_headURL < _maxUrls){
 		char * currURL = _urlArray[_headURL]._url;
 		printf("%d\n",_headURL);
 		_headURL++;
