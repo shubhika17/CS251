@@ -62,7 +62,7 @@ void WebCrawler::onAnchorFound(char *url){
 	int port;
 	char * document;
 	//if(parseURL(url,host, &port,document)!= 0){
-		return;
+		//return;
 	//}
 	if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
