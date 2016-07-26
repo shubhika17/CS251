@@ -41,14 +41,14 @@ void WebCrawler::onContentFound(char c){
 			item -> _urlRecordIndex = _headURL;
 			item -> _next = NULL;
 			_wordToURLRecordList -> insertItem(word,item);
-		}else if(n -> _urlRecordIndex != _headURL) {
+		}else {
 			URLRecordList * item = new URLRecordList();
 			item -> _urlRecordIndex = _headURL;
 			item -> _next = n;
 			_wordToURLRecordList -> insertItem(word, item);
-		} else {
-			word = "";
-		}
+		} 
+			
+		word = NULL;	
 	} 
 }
 void WebCrawler::onAnchorFound(char *url){
