@@ -211,11 +211,6 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		}
 		case CONTENT: 
 		{
-			if(letter >= 500) {
-				b++;
-				state = START;
-				break;
-			}
 			if(foundDes){
 				while(*b != '"'){
 					b++;
@@ -226,6 +221,9 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				}
 				b++;
 				while(*b != '"'){
+					if(letter >= 500){
+						break;
+					}
 					description += *b;
 					b++;
 					letter++;
