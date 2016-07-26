@@ -60,12 +60,12 @@ void WebCrawler::onAnchorFound(char *url){
 	int n;
 	//char * host;
 	//int port;
-	//const char * http = "http://";
+	const char * http = "http://";
 	//char * document;
-	//if(sstrncasecmp(url,http,7)){
+	if(strncasecmp(url,http,7)){
 		
-	//}
-	 if(_urlToUrlRecord -> find(url,&n) == false) {
+	}
+	 else if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
 		_urlArray[_tailURL]._description = NULL;
 		_tailURL++;
