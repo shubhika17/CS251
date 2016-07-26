@@ -11,4 +11,4 @@ git-commit:
 	git commit -a -m "Commit web-crawler" >> .local.git.out
 
 clean:
-	rm -f *.o gethttp webcrawler core
+	rm -f *.o gethttp webcrawler core url.txt word.txt
