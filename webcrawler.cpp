@@ -76,7 +76,7 @@ void WebCrawler::crawl() {
 	while(_headURL < _tailURL){
 		char * currURL = _urlArray[_headURL]._url;
 		printf("%d\n",_headURL);
-		_headURL++;
+		//_headURL++;
 		int n;
 		char * currBuffer = fetchHTML(currURL, &n);
 		//printf("asdifahsi\n");
@@ -87,7 +87,7 @@ void WebCrawler::crawl() {
 		//printf("wsgqsdgja\n");
 		_urlArray[_headURL-1]._description = strdup(description.c_str());
 		description = "";
-		//_headURL += 1;
+		_headURL += 1;
 	}
 }
 void WebCrawler::writeURLFile(const char * urlFileName){
