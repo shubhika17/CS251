@@ -216,6 +216,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				break;
 				
 			}
+			int letter = 0;
 			if(foundDes){
 				while(*b != '"'){
 					b++;
