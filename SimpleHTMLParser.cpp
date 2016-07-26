@@ -23,8 +23,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	enum { START, TAG, SCRIPT, ANCHOR, HREF,
 	       COMMENT, FRAME, SRC, HTML, META, CONTENT, TITLE} state;
 
-	state = START;
-	int letter = 0;	
+	state = START;	
 	char * bufferEnd = buffer + n;
 	char * b = buffer;
 	bool lastCharSpace = false;
