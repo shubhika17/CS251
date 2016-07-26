@@ -121,9 +121,6 @@ int i = hash(key);
   }
   HashTableTemplateEntry<Data> * list = _buckets[i];
   while((list!= NULL)){
-	 if(list -> _key == NULL){
-	 	continue;
-	 }
 	 if(strcmp(list -> _key,key) == 0){
 		*data = list -> _data;
 		return true;
