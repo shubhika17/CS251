@@ -47,8 +47,7 @@ void WebCrawler::onContentFound(char c){
 			item -> _next = n;
 			_wordToURLRecordList -> insertItem(word, item);
 		} else {
-			//delete word;
-			word = NULL;
+			word = "";
 		}
 	} 
 }
