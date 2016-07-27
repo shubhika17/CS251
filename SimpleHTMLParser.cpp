@@ -217,7 +217,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			int letter = 0;
 			if(foundDes){
-				while(*b != '"'){
+				while((*b != '"') && b < bufferEnd){
 					b++;
 				}
 				if (title){
@@ -225,7 +225,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					title = false;
 				}
 				b++;
-				while(*b != '"'){
+				while((*b != '"') && b < bufferEnd){
 					if(letter >= 500){
 						break;
 					}
@@ -242,10 +242,10 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	}
 		case TITLE:
 		{
-			if (*b == '>'){
+			if (*b == '>' && b < bufferEnd){
 				b++;
 			}
-			while( *b != '<'){
+			while(( *b != '<') && b < bufferEnd){
 				description += *b;
 				b++;
 			}
