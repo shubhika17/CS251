@@ -192,13 +192,20 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			char * buffer = b;
 			int count = 0;
 			for(int i = 0; count < 2; i++){
-			
-			if(*(buffer) == '"'){
+				if(b < bufferEnd) {
+					break;
+				}
+				if(*(buffer) == '"'){
 					count++;
 				}
 				buffer++;
 			}
-			while( *buffer != 'n'){
+
+			if(b < bufferEnd) {
+				break;
+			}
+	
+			while( b < bufferEnd && *buffer != 'n'){
 				buffer++;
 			}
 			if (match(&buffer,"name=\"description\"")){
