@@ -201,7 +201,8 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				buffer++;
 			}
 
-			if(b < bufferEnd) {
+			if(b >= bufferEnd) {
+				state = START;
 				break;
 			}
 	
