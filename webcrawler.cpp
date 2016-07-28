@@ -67,38 +67,15 @@ void WebCrawler::onAnchorFound(char *url){
 	int len = strlen(url);
 	if(strncasecmp(url,http,7) != 0 && strncasecmp(url,https,8) != 0){
 		
-	}//else if(temp.rfind(".com") != string::npos) {
+	}else if(temp.rfind(".com") != string::npos) {
 		
-	//}else if(temp.rfind(".edu") != string::npos){
+	}else if(temp.rfind(".edu") != string::npos){
 		
-	//}else if(temp.rfind(".php") != string::npos){
+	}else if(temp.rfind(".php") != string::npos){
 	
-	//}else if(temp.rfind(".html") != string::npos){
+	}else if(temp.rfind(".html") != string::npos){
 		
-	//}else if(temp.rfind("/") == '/'){
-	//	char * temp2 = new char[11 + len];
-	//	string index = "index.html";
-	//	int count = 0;
-	//	for(int i = 0; i < len + 10; i++) {
-	//		if(i < len) {
-	//			temp2[i] = url[i];
-	//		}else{
-	//			temp2[i] = index[count];
-	//			count++;
-	//		}
-	//	}
-	//	url = temp2;
-	///	 if(_urlToUrlRecord -> find(url,&n) == false) {
-	//		_urlArray[_tailURL]._url = strdup(url);
-	//		_urlArray[_tailURL]._description = NULL;
-	//		_tailURL++;
-	//		_urlToUrlRecord -> insertItem(url,_headURL);
-	//		count++;	
-	//	}
-		
-		
-	//} 
-	else if(_urlToUrlRecord -> find(url,&n) == false) {
+	}else if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
 			printf("jdvjkks\n");
 		_urlArray[_tailURL]._description = NULL;
