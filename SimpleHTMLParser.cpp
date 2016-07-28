@@ -29,7 +29,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	bool lastCharSpace = false;
 	bool foundDes = false;
 	//bool des = false;
-	bool title = false;
+	title = false;
 	int count = 0;
 	while (b < bufferEnd) {
 		//printf("<%c,%d,%d>", *b, *b,state);
