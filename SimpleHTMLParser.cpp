@@ -237,7 +237,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					title = false;
 				}
 				b++;
-				while((*b != '"') || b < bufferEnd){
+				while((*b != '"') && b < bufferEnd){
 					if(letter >= 500){
 						break;
 					}
