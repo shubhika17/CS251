@@ -258,6 +258,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				buffer++;
 			}
 			buffer--;
+			buffer--;
 			while(( *buffer != '<') &&  (*buffer != '"') && *buffer != ':' && *buffer != '{'&& *buffer != '='  && *buffer != ';' && *buffer != '.' && *buffer != '/' && *buffer != '#'){
 				description += *buffer;
 				buffer++;
