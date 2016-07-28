@@ -223,8 +223,10 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					buffer++;
 				}
 				if (title){
-					description = "";
-					title = false;
+					description += " ";
+					description += ":";
+					description += " ";
+					//title = false;
 				}
 				//buffer++;
 				while((*buffer != '"') && *buffer != '/' && *buffer != '#'){
