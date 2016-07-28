@@ -223,6 +223,10 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				break;
 				
 			}
+			if(b >= bufferEnd){
+				state = START;
+				break;
+			} 
 			int letter = 0;
 			if(foundDes){
 				while(b < bufferEnd || (*b != '"')){
