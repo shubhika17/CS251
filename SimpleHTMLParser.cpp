@@ -225,7 +225,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					description = "";
 					title = false;
 				}
-				buffer++;
+				//buffer++;
 				while((*buffer != '"') && *buffer != '/' && *buffer != '#'){
 					if(letter >= 500){
 						break;
