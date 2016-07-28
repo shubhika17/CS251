@@ -206,7 +206,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				break;
 			}
 	
-			while( b < bufferEnd || *buffer != 'n'){
+			while(*buffer != 'n'){
 				buffer++;
 			}
 			if (match(&buffer,"name=\"description\"")){
