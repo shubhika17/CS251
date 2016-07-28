@@ -199,7 +199,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				}
 				b++;
 			}	
-			while(*b != 'n'){
+			while(b < bufferEnd && *b != 'n'){
 				b++;
 			}
 			if (match(&b,"name=\"description\"")){
