@@ -69,7 +69,7 @@ void WebCrawler::onAnchorFound(char *url){
 		
 	}else if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
-			printf("jdvjkks\n");
+			//printf("jdvjkks\n");
 		_urlArray[_tailURL]._description = NULL;
 		_tailURL++;
 		_urlToUrlRecord -> insertItem(url,_headURL);
@@ -91,6 +91,7 @@ void WebCrawler::crawl() {
 		//printf("wsgqsdgja\n");
 		_urlArray[_headURL-1]._description = strdup(description.c_str());
 		description = "";
+		desc = false;
 		//_headURL += 1;
 	}
 }
