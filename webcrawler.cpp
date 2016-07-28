@@ -77,7 +77,7 @@ void WebCrawler::onAnchorFound(char *url){
 	}
 }
 void WebCrawler::crawl() {
-	while(_headURL < _tailURL){
+	while(_headURL < _tailURL - 1){
 		char * currURL = strdup(_urlArray[_headURL]._url);
 		//printf("%d\n",_headURL);
 		_headURL++;
@@ -95,7 +95,7 @@ void WebCrawler::crawl() {
 		title = false;
 		letter = 0;
 		//_headURL += 1;
-		printf("%d\n",_headURL);
+		printf("%d\n",_headURL - 1);
 	}
 }
 void WebCrawler::writeURLFile(const char * urlFileName){
