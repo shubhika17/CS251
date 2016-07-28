@@ -229,7 +229,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			} 
 			int letter = 0;
 			if(foundDes){
-				while(b < bufferEnd || (*b != '"')){
+				while(b < bufferEnd && (*b != '"')){
 					b++;
 				}
 				if (title){
