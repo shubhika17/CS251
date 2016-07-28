@@ -61,10 +61,10 @@ void WebCrawler::onAnchorFound(char *url){
 	//char * host;
 	//int port;
 	const char * http = "http://";
-	const char *https = "https://";
+	//const char *https = "https://";
 	//char * document;
-	string temp =  url;
-	int len = strlen(url);
+	//string temp =  url;
+	//int len = strlen(url);
 	if(strncasecmp(url,http,7) != 0 ){	
 		
 	}else if(_urlToUrlRecord -> find(url,&n) == false) {
