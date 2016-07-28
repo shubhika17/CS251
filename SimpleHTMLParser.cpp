@@ -101,8 +101,9 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				state = ANCHOR;
 		
 		urlAnchor[urlAnchorLength] = '\0';
+				
 				onAnchorFound(urlAnchor);
-		
+				printf("here\n");
 		//printf("\n");
 			}
 			else {
@@ -137,7 +138,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				state = FRAME;
 				urlAnchor[urlAnchorLength] = '\0';
 				onAnchorFound(urlAnchor);
-				//printf("\n");
+				printf("here\n");
 			}
 			else {
 				if ( urlAnchorLength < MaxURLLength-1) {
