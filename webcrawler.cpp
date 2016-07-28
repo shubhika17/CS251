@@ -95,6 +95,7 @@ void WebCrawler::crawl() {
 		title = false;
 		letter = 0;
 		//_headURL += 1;
+		printf("%d\n",_headURL);
 	}
 }
 void WebCrawler::writeURLFile(const char * urlFileName){
