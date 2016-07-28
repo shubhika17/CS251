@@ -66,15 +66,15 @@ void WebCrawler::onAnchorFound(char *url){
 	string temp =  url;
 	int len = strlen(url);
 	if(strncasecmp(url,http,7) != 0 || strncasecmp(url,https,8) != 0){
-		return;
+		
 	}else if(temp.rfind(".com") != string::npos) {
-		return;
+		
 	}else if(temp.rfind(".edu") != string::npos){
-		return;
+		
 	}else if(temp.rfind(".php") != string::npos){
-		return;
+	
 	}else if(temp.rfind(".html") != string::npos){
-		return;
+		
 	}else if(_urlToUrlRecord -> find(url,&n) == false) {
 		_urlArray[_tailURL]._url = strdup(url);
 		_urlArray[_tailURL]._description = NULL;
