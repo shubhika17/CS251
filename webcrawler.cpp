@@ -65,7 +65,7 @@ void WebCrawler::onAnchorFound(char *url){
 	//char * document;
 	string temp =  url;
 	int len = strlen(url);
-	if(strncasecmp(url,http,7) != 0 || strncasecmp(url,https,8) != 0){
+	if(strncasecmp(url,http,7) != 0 && strncasecmp(url,https,8) != 0){
 		
 	}//else if(temp.rfind(".com") != string::npos) {
 		
@@ -99,9 +99,6 @@ void WebCrawler::onAnchorFound(char *url){
 		
 	//} 
 	else if(_urlToUrlRecord -> find(url,&n) == false) {
-		if(url == NULL) {
-			return;
-		}
 		_urlArray[_tailURL]._url = strdup(url);
 			printf("jdvjkks\n");
 		_urlArray[_tailURL]._description = NULL;
