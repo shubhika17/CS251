@@ -194,7 +194,10 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			char * buffer = b;
 			int count = 0;
 			for(int i = 0; count < 2; i++){		
-				if(b < bufferEnd && *(b) == '"' ){
+				if(b < bufferEnd) {
+					break;
+				}
+				if(*(b) == '"' ){
 					count++;
 				}
 				b++;
