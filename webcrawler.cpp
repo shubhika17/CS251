@@ -99,7 +99,11 @@ void WebCrawler::onAnchorFound(char *url){
 		
 	//} 
 	else if(_urlToUrlRecord -> find(url,&n) == false) {
+		if(url == NULL) {
+			return;
+		}
 		_urlArray[_tailURL]._url = strdup(url);
+			printf("jdvjkks\n");
 		_urlArray[_tailURL]._description = NULL;
 		_tailURL++;
 		_urlToUrlRecord -> insertItem(url,_headURL);
