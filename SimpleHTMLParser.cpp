@@ -194,7 +194,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			char * buffer = b;
 			int count = 0;
 			for(int i = 0; count < 2; i++){		
-				if(*(b) == '"'){
+				if(b < bufferEnd && *(b) == '"' ){
 					count++;
 				}
 				b++;
@@ -219,7 +219,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			char * buffer = b;
 			//int letter = 0;
 			if(foundDes){
-				while(*buffer != '"'){
+				while(buffer < bufferEnd && *buffer != '"'){
 					buffer++;
 				}
 				if (title){
@@ -229,7 +229,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 					//title = false;
 				}
 				//buffer++;
-				while((*buffer != '"') && *buffer != '=' && *buffer != '.'&& *buffer != ':' && *buffer != '/' && *buffer != '#'){
+				while(buffer < bufferEnd && (*buffer != '"') && *buffer != '=' && *buffer != '.'&& *buffer != ':' && *buffer != '/' && *buffer != '#'){
 					if(letter >= 500){
 						break;
 					}
@@ -254,12 +254,12 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			}
 			int letter = 0;
 			char * buffer = b;
-			if (*buffer != '>'){
+			if (buffer < bufferEnd && *buffer != '>'){
 				buffer++;
 			}
 			buffer--;
 			//buffer--;
-			while(( *buffer != '<') &&  (*buffer != '"') && *buffer != ':' && *buffer != '{'&& *buffer != '='  && *buffer != ';' && *buffer != '.' && *buffer != '/' && *buffer != '#'){
+			while(buffer < bufferEnd && ( *buffer != '<') &&  (*buffer != '"') && *buffer != ':' && *buffer != '{'&& *buffer != '='  && *buffer != ';' && *buffer != '.' && *buffer != '/' && *buffer != '#'){
 				description += *buffer;
 				buffer++;
 				letter++;
