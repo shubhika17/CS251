@@ -93,6 +93,7 @@ void WebCrawler::crawl() {
 		description = "";
 		desc = false;
 		title = false;
+		letter = 0;
 		//_headURL += 1;
 	}
 }

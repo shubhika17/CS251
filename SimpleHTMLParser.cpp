@@ -216,7 +216,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				
 			}
 			char * buffer = b;
-			int letter = 0;
+			//int letter = 0;
 			if(foundDes){
 				while(*buffer != '"'){
 					buffer++;
@@ -236,7 +236,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 				}
 				foundDes = false;	
 				desc = true;			
-				letter = 0;
+				//letter = 0;
 			state = START;
 			b++;
 			break;
@@ -244,7 +244,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	}
 		case TITLE:
 		{
-			if(desc == true || title == true) {
+			if(desc == true) {
 				state = START;
 				b++;
 				break;
