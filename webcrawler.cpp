@@ -92,6 +92,7 @@ void WebCrawler::crawl() {
 		_urlArray[_headURL-1]._description = strdup(description.c_str());
 		description = "";
 		desc = false;
+		title = false;
 		//_headURL += 1;
 	}
 }
