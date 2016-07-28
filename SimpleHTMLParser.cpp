@@ -244,18 +244,23 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	}
 		case TITLE:
 		{
-			if(desc == true) {
+			if(desc == true || title == true) {
 				state = START;
 				b++;
 				break;
 			}
+			int letter = 0;
 			char * buffer = b;
 			if (*buffer != '>'){
 				buffer++;
 			}
-			while(( *buffer != '<') &&  (*buffer != '"') && *buffer != '/' && *buffer != '#'){
+			while(( *buffer != '<') &&  (*buffer != '"') && *buffer != ';' && *buffer != '.' && *buffer != '/' && *buffer != '#'){
 				description += *buffer;
 				buffer++;
+				letter++;
+				if(letter > 500) {
+					break;
+				}
 			}
 			title = true;
 			state = START;
