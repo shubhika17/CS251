@@ -194,19 +194,19 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			char * buffer = b;
 			int count = 0;
 			for(int i = 0; count < 2; i++){		
-				if(*(b) == '"'){
+				if(*(buffer) == '"'){
 					count++;
 				}
-				b++;
+				buffer++;
 			}	
-			while(*b != 'n'){
-				b++;
+			while(*buffer != 'n'){
+				buffer++;
 			}
-			if (match(&b,"name=\"description\"")){
+			if (match(&buffer,"name=\"description\"")){
 				foundDes = true;	
 			}
 			state = START;
-			//b++;
+			b++;
 			break;			 		
 		}
 		case CONTENT: 
