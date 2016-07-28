@@ -18,7 +18,7 @@ class SimpleHTMLParser {
 	string description;	
 	bool desc;	
 	bool title;
-	int letter = 0;
+	int letter ;
 	bool parse(char * buffer, int n);
 
 	// Calbacks

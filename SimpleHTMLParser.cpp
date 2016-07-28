@@ -28,6 +28,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	char * b = buffer;
 	bool lastCharSpace = false;
 	bool foundDes = false;
+	letter = 0;
 	//bool des = false;
 	title = false;
 	int count = 0;
