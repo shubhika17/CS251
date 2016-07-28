@@ -90,7 +90,7 @@ bool HashTableTemplate<Data>::insertItem( const char * key, Data data)
 		list = list -> _next;
   }
   	//printf("here \n");
-	HashTableTemplateEntry<Data> * entry = new HashTableTemplateEntry<Data>[TableSize];
+	HashTableTemplateEntry<Data> * entry = new HashTableTemplateEntry<Data>;
 	entry -> _key = strdup(key);
 	entry -> _data = data;
 	entry -> _next = _buckets[i];
@@ -99,7 +99,7 @@ bool HashTableTemplate<Data>::insertItem( const char * key, Data data)
 	//printf("entry %s %d \n", _buckets[i] -> _key, i);
 	return false;
 	}else {
-	HashTableTemplateEntry<Data> * entry = new HashTableTemplateEntry<Data>[TableSize];
+	HashTableTemplateEntry<Data> * entry = new HashTableTemplateEntry<Data>;
 	entry -> _key = strdup(key);
 	entry -> _data = data;
 	entry -> _next = NULL;
