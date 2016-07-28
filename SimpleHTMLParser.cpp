@@ -28,7 +28,7 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	char * b = buffer;
 	bool lastCharSpace = false;
 	bool foundDes = false;
-	bool des = false;
+	//bool des = false;
 	bool title = false;
 	int count = 0;
 	while (b < bufferEnd) {
@@ -191,21 +191,12 @@ SimpleHTMLParser::parse(char * buffer, int n)
 		{
 			char * buffer = b;
 			int count = 0;
-			for(int i = 0; count < 2; i++){
-				if(b > bufferEnd) {
-					break;
-				}
+			for(int i = 0; count < 2; i++){		
 				if(*(buffer) == '"'){
 					count++;
 				}
 				buffer++;
-			}
-
-			if(b >= bufferEnd) {
-				state = START;
-				break;
-			}
-	
+			}	
 			while(*buffer != 'n'){
 				buffer++;
 			}
@@ -217,36 +208,34 @@ SimpleHTMLParser::parse(char * buffer, int n)
 			break;			 		
 		}
 		case CONTENT: 
-		{	if(des == true){
+		{	if(desc == true){
 				b++;
 				state = START;
 				break;
 				
 			}
-			if(b >= bufferEnd){
-				state = START;
-				break;
-			} 
+			char * buffer = b;
 			int letter = 0;
 			if(foundDes){
-				while(b < bufferEnd && (*b != '"')){
-					b++;
+				while(*buffer != '"'){
+					buffer++;
 				}
 				if (title){
 					description = "";
 					title = false;
 				}
-				b++;
-				while((*b != '"') && b < bufferEnd){
+				buffer++;
+				while((*buffer != '"')){
 					if(letter >= 500){
 						break;
 					}
-					description += *b;
-					b++;
+					description += *buffer;
+					buffer++;
 					letter++;
 				}
-				foundDes = false;			
-				des = true;			
+				foundDes = false;	
+				desc = true;			
+				letter = 0;
 			state = START;
 			b++;
 			break;
@@ -254,12 +243,18 @@ SimpleHTMLParser::parse(char * buffer, int n)
 	}
 		case TITLE:
 		{
-			if (*b == '>' || b < bufferEnd){
+			if(desc == true) {
+				state = START;
 				b++;
+				break;
 			}
-			while(( *b != '<') || b < bufferEnd){
-				description += *b;
-				b++;
+			char * buffer = b;
+			if (*buffer != '>'){
+				buffer++;
+			}
+			while(( *buffer != '<')){
+				description += *buffer;
+				buffer++;
 			}
 			title = true;
 			state = START;
